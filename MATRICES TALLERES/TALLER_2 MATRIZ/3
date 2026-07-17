@@ -1,0 +1,85 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<windows.h>
+
+// Juan Serrano 4-831-787
+
+void gotoxy (int x, int y){
+HANDLE Ventana;
+Ventana = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD Coordenadas;
+Coordenadas.X = x;
+Coordenadas.Y = y;
+
+SetConsoleCursorPosition(Ventana, Coordenadas);
+
+}
+
+int main(){
+    int c, f , x, y, n;
+    char letra;
+    do{
+        x=0;
+        y=3;  
+        printf("Ingrese las dimensiones de la matriz:");
+        scanf(" %d", &n);
+        gotoxy(x,y);
+        y++;
+        int Mat [n][n];
+        printf("Ingrese los datos de la matriz: ");
+        for ( f = 0; f < n; f++){
+            for (c = 0; c < n; c++){
+                gotoxy(x,y);
+                scanf(" %d", &Mat[f][c]);
+                x+=3;
+            } 
+            x=0;
+            y++;
+        }
+        for ( f = 0; f < n; f++){
+            for (c = 0; c < n; c++){
+                if (Mat[f][c] % 2 == 0){
+                    Mat[f][c] = 0;
+                    
+                }
+                else{
+                    Mat[f][c] = 1;
+                }
+            }   
+            
+        }
+        gotoxy(x,y);
+        x=0;
+        y++;
+        printf("Matriz resultante: ");
+        gotoxy(x,y);
+        x=0;
+        y++;
+        for ( f = 0; f < n; f++){
+            for (c = 0; c < n; c++){
+                gotoxy(x,y);
+                printf("%d", Mat[f][c]);
+                x+=3;
+            } 
+            gotoxy(x,y);
+            y++;
+            x=0;
+        }
+        gotoxy(x,y);
+        x=0;
+        y++;
+        
+        printf("Desea procesar otra informacion?(s/n): ");
+        scanf(" %c", &letra);
+        while ((letra !='s' && letra !='S') && (letra !='N' && letra !='n')){
+            system("cls");
+            printf("Caracter invalido, ingrese (s/n): ");
+            scanf(" %c", &letra);
+        }
+        system("cls");
+        
+    } while (letra=='S'|| letra== 's');
+
+
+    return 0;
+}
